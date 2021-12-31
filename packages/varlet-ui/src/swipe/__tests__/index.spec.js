@@ -1,4 +1,3 @@
-import example from '../example'
 import Swipe from '..'
 import SwipeItem from '../../swipe-item'
 import VarSwipe from '../Swipe'
@@ -8,13 +7,6 @@ import { createApp } from 'vue'
 import { delay, mockOffset, triggerDrag } from '../../utils/jest'
 
 mockOffset()
-
-test('test swipe example', async () => {
-  const wrapper = mount(example)
-  await delay(300)
-  expect(wrapper.html()).toMatchSnapshot()
-  wrapper.unmount()
-})
 
 test('test swipe & swipe-item plugin', () => {
   const app = createApp({}).use(Swipe).use(SwipeItem)
