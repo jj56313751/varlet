@@ -30,43 +30,32 @@ async function publish(preRelease: boolean) {
   }
 }
 
-async function pushGit(version: string) {
+async function pushGit(version: string, remote = 'origin') {
   const s = ora().start('Pushing to remote git repository')
   await execa('git', ['add', '.'])
   await execa('git', ['commit', '-m', `v${version}`])
   await execa('git', ['tag', `v${version}`])
-  await execa('git', ['push', 'origin', `v${version}`])
+  await execa('git', ['push', remote, `v${version}`])
   const ret = await execa('git', ['push'])
   s.succeed('Push remote repository successfully')
 
   ret.stdout && logger.info(ret.stdout)
 }
 
-type packageJsonMap = {
-  file: string
-  content: string
-}
-
-type packageJsonMaps = packageJsonMap[]
-
-function updateVersion(version: string): packageJsonMaps {
+function updateVersion(version: string) {
   const packageJsons = glob.sync('packages/*/package.json')
   packageJsons.push('package.json')
 
-  return packageJsons.map((path: string) => {
+  packageJsons.forEach((path: string) => {
     const file = resolve(CWD, path)
     const config = require(file)
-    const currentVersion = config.version
 
     config.version = version
     writeFileSync(file, JSON.stringify(config, null, 2))
-
-    config.version = currentVersion
-    return { file, content: JSON.stringify(config, null, 2) }
   })
 }
 
-export async function release() {
+export async function release(cmd: { remote?: string }) {
   try {
     const currentVersion = require(resolve(CWD, 'package.json')).version
 
@@ -106,24 +95,25 @@ export async function release() {
       return
     }
 
-    const packageJsonMaps = updateVersion(expectVersion)
+    updateVersion(expectVersion)
 
     if (!isPreRelease) {
       await changelog()
-      await pushGit(expectVersion)
+      await pushGit(expectVersion, cmd.remote)
     }
 
     await publish(isPreRelease)
 
+    logger.success(`Release version ${expectVersion} successfully!`)
+
     if (isPreRelease) {
-      packageJsonMaps.forEach(({ file, content }) => writeFileSync(file, content))
       try {
         await execa('git', ['restore', '**/package.json'])
-        // eslint-disable-next-line no-empty
-      } catch (e) {}
+        await execa('git', ['restore', 'package.json'])
+      } catch {
+        logger.error('Restore package.json has failed, please restore manually')
+      }
     }
-
-    logger.success(`Release version ${expectVersion} successfully!`)
   } catch (error: any) {
     logger.error(error.toString())
     process.exit(1)

@@ -2,8 +2,8 @@
 
 ### Reference
 
-[@varlet/cli 中文文档](https://github.com/haoziqaq/varlet/blob/dev/packages/varlet-cli/README.md)
-[@varlet/cli documentation](https://github.com/haoziqaq/varlet/blob/dev/packages/varlet-cli/README.en-US.md)
+[@varlet/cli 中文文档](https://github.com/varletjs/varlet/blob/dev/packages/varlet-cli/README.md)
+[@varlet/cli documentation](https://github.com/varletjs/varlet/blob/dev/packages/varlet-cli/README.en-US.md)
 
 ### Quickstart
 
@@ -50,12 +50,6 @@ pnpm test
 pnpm test:watch 
 or
 pnpm test:watchAll 
-```
-
-#### Quickly create a component folder
-
-```shell
-pnpm run create <componentName>
 ```
 
 #### Mount git hook

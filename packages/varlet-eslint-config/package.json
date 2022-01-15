@@ -1,6 +1,6 @@
 {
   "name": "@varlet/eslint-config",
-  "version": "1.24.4",
+  "version": "1.24.11",
   "description": "eslint config of varlet",
   "keywords": [
     "eslint",
@@ -13,10 +13,10 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/haoziqaq/varlet.git"
+    "url": "https://github.com/varletjs/varlet.git"
   },
   "bugs": {
-    "url": "https://github.com/haoziqaq/varlet/issues"
+    "url": "https://github.com/varletjs/varlet/issues"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^4.6.0",

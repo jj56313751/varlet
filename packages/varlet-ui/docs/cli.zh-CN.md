@@ -140,7 +140,7 @@ module.exports = {
     header: {
       darkMode: null,
       i18n: null,
-      github: 'https://github.com/haoziqaq/varlet',
+      github: 'https://github.com/varletjs/varlet',
     },
     menu: [
       {
@@ -182,7 +182,7 @@ module.exports = {
     header: {
       darkMode: null,
       i18n: null,
-      github: 'https://github.com/haoziqaq/varlet',
+      github: 'https://github.com/varletjs/varlet',
     },
   },
 }
@@ -250,12 +250,6 @@ varlet-cli changelog
 
 ```shell
 varlet-cli release
-```
-
-#### 快速创建一个组件文件夹
-
-```shell
-varlet-cli create <componentName>
 ```
 
 #### 生成一个项目模板

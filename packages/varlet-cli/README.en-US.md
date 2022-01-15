@@ -144,7 +144,7 @@ module.exports = {
     header: {
       darkMode: null,
       i18n: null,
-      github: 'https://github.com/haoziqaq/varlet',
+      github: 'https://github.com/varletjs/varlet',
     },
     menu: [
       {
@@ -186,7 +186,7 @@ module.exports = {
     header: {
       darkMode: null,
       i18n: null,
-      github: 'https://github.com/haoziqaq/varlet',
+      github: 'https://github.com/varletjs/varlet',
     },
   },
 }
@@ -254,12 +254,6 @@ varlet-cli changelog
 
 ```shell
 varlet-cli release
-```
-
-#### Quickly create a component folder
-
-```shell
-varlet-cli create <componentName>
 ```
 
 #### Generate a project template
@@ -383,6 +377,6 @@ create `tsconfig.json`
 
 ### Contributors
 
-<a href="https://github.com/haoziqaq/varlet/graphs/contributors">
+<a href="https://github.com/varletjs/varlet/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=haoziqaq/varlet" />
 </a>
