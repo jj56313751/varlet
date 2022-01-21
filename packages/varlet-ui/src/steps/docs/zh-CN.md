@@ -37,7 +37,7 @@ export default {
     const next = () => {
       active.value = (active.value + 1) % 4
     }
-    
+
     return {
       active,
       next
@@ -49,9 +49,9 @@ export default {
 ### 自定义样式
 
 ```html
-<var-steps 
-  :active="active"  
-  active-color="#f44336" 
+<var-steps
+  :active="active"
+  active-color="#f44336"
   inactive-color="#e99eb4"
 >
   <var-step active-icon="heart" current-icon="fire" inactive-icon="heart-half-full">
@@ -117,11 +117,11 @@ export default {
 
 | 名称 | 说明 | 参数 |
 | ----- | -------------- | -------- |
-| `default` | step的内容 | `-` |
+| `default` | step 的内容 | `-` |
 
 ### 样式变量
 
-以下为组件使用的 css 变量,可以使用[StyleProvider 组件](#/zh-CN/style-provider)进行样式定制
+以下为组件使用的 css 变量，可以使用 [StyleProvider 组件](#/zh-CN/style-provider)进行样式定制
 
 | 变量名 | 默认值 |
 | --- | --- |

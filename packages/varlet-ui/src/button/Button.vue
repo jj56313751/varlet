@@ -22,12 +22,13 @@
   >
     <var-loading
       class="var-button__loading"
+      var-button-cover
       :type="loadingType"
       :size="loadingSize"
       :radius="loadingRadius"
-      v-if="loading"
+      v-if="loading || pending"
     />
-    <div class="var-button__content" :class="[loading ? 'var-button--hidden' : null]">
+    <div class="var-button__content" :class="[loading || pending ? 'var-button--hidden' : null]">
       <slot />
     </div>
   </button>
@@ -36,7 +37,7 @@
 <script lang="ts">
 import Ripple from '../ripple'
 import VarLoading from '../loading'
-import { defineComponent } from 'vue'
+import { defineComponent, Ref, ref } from 'vue'
 import { props } from './props'
 
 export default defineComponent({
@@ -47,27 +48,39 @@ export default defineComponent({
   directives: { Ripple },
   props,
   setup(props) {
+    const pending: Ref<boolean> = ref(false)
+
+    const attemptAutoLoading = (result: any) => {
+      if (props.autoLoading) {
+        pending.value = true
+        Promise.resolve(result).finally(() => {
+          pending.value = false
+        })
+      }
+    }
+
     const handleClick = (e: Event) => {
       const { loading, disabled, onClick } = props
 
-      if (loading || disabled) {
+      if (!onClick || loading || disabled || pending.value) {
         return
       }
 
-      onClick?.(e)
+      attemptAutoLoading(onClick(e))
     }
 
     const handleTouchstart = (e: Event) => {
       const { loading, disabled, onTouchstart } = props
 
-      if (loading || disabled) {
+      if (!onTouchstart || loading || disabled || pending.value) {
         return
       }
 
-      onTouchstart?.(e)
+      attemptAutoLoading(onTouchstart(e))
     }
 
     return {
+      pending,
       handleClick,
       handleTouchstart,
     }

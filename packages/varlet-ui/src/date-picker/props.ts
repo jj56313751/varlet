@@ -38,9 +38,9 @@ export type PanelBtnDisabled = {
 }
 
 export type Choose = {
-  chooseMonth: MonthDict
-  chooseYear: string
-  chooseDay: string
+  chooseMonth: MonthDict | undefined
+  chooseYear: string | undefined
+  chooseDay: string | undefined
   chooseMonths: Array<string>
   chooseDays: Array<string>
   chooseRangeMonth: Array<string>
@@ -164,9 +164,9 @@ export const props = {
     default: false,
   },
   onChange: {
-    type: Function,
+    type: Function as PropType<(value: string | string[]) => void>,
   },
   'onUpdate:modelValue': {
-    type: Function,
+    type: Function as PropType<(value: string | string[]) => void>,
   },
 }

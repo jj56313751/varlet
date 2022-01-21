@@ -140,7 +140,7 @@ module.exports = {
     header: {
       darkMode: null,
       i18n: null,
-      github: 'https://github.com/haoziqaq/varlet',
+      github: 'https://github.com/varletjs/varlet',
     },
     menu: [
       {
@@ -182,7 +182,7 @@ module.exports = {
     header: {
       darkMode: null,
       i18n: null,
-      github: 'https://github.com/haoziqaq/varlet',
+      github: 'https://github.com/varletjs/varlet',
     },
   },
 }
@@ -252,12 +252,6 @@ varlet-cli changelog
 varlet-cli release
 ```
 
-#### 快速创建一个组件文件夹
-
-```shell
-varlet-cli create <componentName>
-```
-
 #### 生成一个项目模板
 ```shell
 varlet-cli gen <projectName>
@@ -296,12 +290,13 @@ module.exports = {
 
 #### git-hook
 
-`husky`，`lint-staged` 配合 `eslint`，`stylelint`，`varlet-cli commit-lint` 做commit前的检查，`package.json` 配置如下
+`simple-git-hooks`，`lint-staged` 配合 `eslint`，`stylelint`，`varlet-cli commit-lint` 做commit前的检查，`package.json` 配置如下
 
 ```json
 {
-  "scripts": {
-    "prepare": "husky install"
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged --allow-empty --concurrent false",
+    "commit-msg": "npx --no-install varlet-cli commit-lint $1"
   },
   "lint-staged": {
     "*.{ts,tsx,js,vue,less}": "prettier --write",
@@ -336,6 +331,12 @@ module.exports = {
     ]
   }
 }
+```
+
+挂载钩子
+
+```shell
+npx simple-git-hooks
 ```
 
 创建 `.prettierignore`
@@ -378,6 +379,6 @@ src/*/__tests__/**
 
 ### Contributors
 
-<a href="https://github.com/haoziqaq/varlet/graphs/contributors">
+<a href="https://github.com/varletjs/varlet/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=haoziqaq/varlet" />
 </a>

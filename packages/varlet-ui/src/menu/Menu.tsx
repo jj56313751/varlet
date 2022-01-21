@@ -1,4 +1,15 @@
-import { defineComponent, ref, watch, onMounted, onUnmounted, Transition, Teleport, nextTick } from 'vue'
+import {
+  defineComponent,
+  ref,
+  computed,
+  watch,
+  onMounted,
+  onUnmounted,
+  Transition,
+  Teleport,
+  nextTick,
+  TeleportProps,
+} from 'vue'
 import { props } from './props'
 import { getLeft, getTop, toSizeUnit } from '../utils/elements'
 import { useZIndex } from '../context/zIndex'
@@ -15,6 +26,7 @@ export default defineComponent({
   setup(props, { slots }) {
     const host: Ref<null | HTMLElement> = ref(null)
     const menu: Ref<null | HTMLElement> = ref(null)
+    const to: Ref<TeleportProps['to']> = ref()
     const top: Ref<number> = ref(0)
     const left: Ref<number> = ref(0)
     const { zIndex } = useZIndex(() => props.show, 1)
@@ -50,16 +62,21 @@ export default defineComponent({
       left.value = getLeft(host.value as HTMLElement)
     }
 
+    // Transition style use computed place here
+    const transitionStyle = computed(() => {
+      return {
+        top: `calc(${top.value}px + ${toSizeUnit(props.offsetY)})`,
+        left: `calc(${left.value}px + ${toSizeUnit(props.offsetX)})`,
+        zIndex: zIndex.value,
+      }
+    })
+
     const renderTransition = () => (
       <Transition name="var-menu" onAfterEnter={props.onOpen} onAfterLeave={props.onClosed}>
         <div
           class="var-menu__menu var-elevation--3"
           ref={menu}
-          style={{
-            top: `calc(${top.value}px + ${toSizeUnit(props.offsetY)})`,
-            left: `calc(${left.value}px + ${toSizeUnit(props.offsetX)})`,
-            zIndex: zIndex.value,
-          }}
+          style={transitionStyle.value}
           v-show={props.show}
           onClick={(event) => {
             event.stopPropagation()
@@ -84,7 +101,16 @@ export default defineComponent({
       }
     )
 
+    watch(
+      () => props.teleport,
+      (newValue) => {
+        to.value = newValue
+      }
+    )
+
     onMounted(() => {
+      // Synchronously transfer the state to the mount hook to support server-side rendering to prevent hydration errors
+      to.value = props.teleport
       resize()
 
       document.addEventListener('click', handleMenuClose)
@@ -102,8 +128,8 @@ export default defineComponent({
       <div class="var-menu" ref={host} onClick={handleClick}>
         {slots.default?.()}
 
-        {props.teleport ? (
-          <Teleport to={props.teleport} disabled={disabled.value}>
+        {to.value ? (
+          <Teleport to={to.value} disabled={disabled.value}>
             {renderTransition()}
           </Teleport>
         ) : (

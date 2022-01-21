@@ -144,7 +144,7 @@ module.exports = {
     header: {
       darkMode: null,
       i18n: null,
-      github: 'https://github.com/haoziqaq/varlet',
+      github: 'https://github.com/varletjs/varlet',
     },
     menu: [
       {
@@ -186,7 +186,7 @@ module.exports = {
     header: {
       darkMode: null,
       i18n: null,
-      github: 'https://github.com/haoziqaq/varlet',
+      github: 'https://github.com/varletjs/varlet',
     },
   },
 }
@@ -256,12 +256,6 @@ varlet-cli changelog
 varlet-cli release
 ```
 
-#### Quickly create a component folder
-
-```shell
-varlet-cli create <componentName>
-```
-
 #### Generate a project template
 ```shell
 varlet-cli gen <projectName>
@@ -300,13 +294,14 @@ module.exports = {
 
 #### git-hook
 
-`husky`, `lint-staged` cooperate with `eslint`, `stylelint`, `varlet-cli commit-lint` to check before commit, 
+`simple-git-hooks`, `lint-staged` cooperate with `eslint`, `stylelint`, `varlet-cli commit-lint` to check before commit, 
 `package.json` configuration is as follows
 
 ```json
 {
-  "scripts": {
-    "prepare": "husky install"
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged --allow-empty --concurrent false",
+    "commit-msg": "npx --no-install varlet-cli commit-lint $1"
   },
   "lint-staged": {
     "*.{ts,tsx,js,vue,less}": "prettier --write",
@@ -341,6 +336,12 @@ module.exports = {
     ]
   }
 }
+```
+
+Mount Git Hooks
+
+```shell
+npx simple-git-hooks
 ```
 
 create `.prettierignore`
@@ -383,6 +384,6 @@ create `tsconfig.json`
 
 ### Contributors
 
-<a href="https://github.com/haoziqaq/varlet/graphs/contributors">
+<a href="https://github.com/varletjs/varlet/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=haoziqaq/varlet" />
 </a>
