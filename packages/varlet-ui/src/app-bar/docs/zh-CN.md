@@ -19,13 +19,13 @@ createApp().use(AppBar)
 
 ### 自定义样式
 
-通过 `title-position`、 `color` 属性设置标题所处位置、导航栏颜色。
+通过 `title-position`、`color` 属性设置标题所处位置、导航栏颜色。
 
 ```html
 <var-app-bar
   title="标题"
   title-position="center"
-  color="#ff9f00"
+  color="#00c48f"
 />
 ```
 
