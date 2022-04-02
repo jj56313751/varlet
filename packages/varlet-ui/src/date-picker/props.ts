@@ -4,6 +4,8 @@ type AllowedDates = (val: string) => boolean
 
 type DatePickerType = 'date' | 'month'
 
+export type TouchDirection = 'x' | 'y'
+
 export type Month = '01' | '02' | '03' | '04' | '05' | '06' | '07' | '08' | '09' | '10' | '11' | '12'
 
 export type Week = '0' | '1' | '2' | '3' | '4' | '5' | '6'
@@ -38,9 +40,9 @@ export type PanelBtnDisabled = {
 }
 
 export type Choose = {
-  chooseMonth: MonthDict
-  chooseYear: string
-  chooseDay: string
+  chooseMonth: MonthDict | undefined
+  chooseYear: string | undefined
+  chooseDay: string | undefined
   chooseMonths: Array<string>
   chooseDays: Array<string>
   chooseRangeMonth: Array<string>
@@ -162,6 +164,10 @@ export const props = {
   range: {
     type: Boolean,
     default: false,
+  },
+  touchable: {
+    type: Boolean,
+    default: true,
   },
   onChange: {
     type: Function as PropType<(value: string | string[]) => void>,

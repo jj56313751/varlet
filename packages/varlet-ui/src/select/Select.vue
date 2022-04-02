@@ -54,7 +54,7 @@
                   v-for="l in labels"
                   :key="l"
                   @click.stop
-                  @close="(e) => handleClose(l)"
+                  @close="() => handleClose(l)"
                 >
                   {{ l }}
                 </var-chip>
@@ -77,10 +77,15 @@
           <label
             class="var-select__placeholder var--ellipsis"
             :class="[
+              isFocus ? 'var-select--focus' : null,
+              errorMessage ? 'var-select--error' : null,
               formDisabled || disabled ? 'var-select--disabled' : null,
               computePlaceholderState(),
               !hint ? 'var-select--placeholder-non-hint' : null,
             ]"
+            :style="{
+              color: !errorMessage ? (isFocus ? focusColor : blurColor) : undefined,
+            }"
           >
             {{ placeholder }}
           </label>
@@ -243,7 +248,7 @@ export default defineComponent({
       }
 
       wrapWidth.value = getWrapWidth()
-      offsetY.value = getOffsetY()
+      offsetY.value = getOffsetY() + toPxNum(props.offsetY)
 
       isFocus.value = true
 
@@ -336,6 +341,8 @@ export default defineComponent({
 
     // expose
     const focus = () => {
+      wrapWidth.value = getWrapWidth()
+      offsetY.value = getOffsetY() + toPxNum(props.offsetY)
       isFocus.value = true
     }
 

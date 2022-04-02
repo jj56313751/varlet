@@ -51,6 +51,8 @@ export const isNumber = (val: unknown): val is number => typeof val === 'number'
 export const isPlainObject = (val: unknown): val is Record<string, any> =>
   Object.prototype.toString.call(val) === '[object Object]'
 
+export const isObject = (val: unknown): val is Record<string, any> => typeof val === 'object' && val !== null
+
 export const isArray = (val: unknown): val is Array<any> => Array.isArray(val)
 
 export const isURL = (val: string | undefined | null) => {
@@ -171,7 +173,6 @@ export const inBrowser = () => typeof window !== 'undefined'
 export const uniq = (arr: Array<any>) => [...new Set(arr)]
 
 export function kebabCase(str: string): string {
-  const reg = /([^-])([A-Z])/g
-
-  return str.replace(reg, '$1-$2').replace(reg, '$1-$2').toLowerCase()
+  const ret = str.replace(/([A-Z])/g, ' $1').trim()
+  return ret.split(' ').join('-').toLowerCase()
 }
