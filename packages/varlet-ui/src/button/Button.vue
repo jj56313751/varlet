@@ -1,17 +1,19 @@
 <template>
   <button
     v-ripple="{ disabled: disabled || !ripple }"
-    class="var-button var--box"
-    :class="[
-      `var-button--${size}`,
-      block ? 'var--flex var-button--block' : 'var--inline-flex',
-      disabled ? 'var-button--disabled' : null,
-      text ? `var-button--text-${type}` : `var-button--${type}`,
-      text ? 'var-button--text' : 'var-elevation--2',
-      text && disabled ? 'var-button--text-disabled' : null,
-      round ? 'var-button--round' : null,
-      outline ? 'var-button--outline' : null,
-    ]"
+    :class="
+      classes(
+        n(),
+        'var--box',
+        n(`--${size}`),
+        [block, `var--flex ${n('--block')}`, 'var--inline-flex'],
+        [disabled, n('--disabled')],
+        [text, `${n(`--text-${type}`)} ${n('--text')}`, `${n(`--${type}`)} var-elevation--2`],
+        [text && disabled, n('--text-disabled')],
+        [round, n('--round')],
+        [outline, n('--outline')]
+      )
+    "
     :style="{
       color: textColor,
       background: color,
@@ -21,14 +23,14 @@
     @touchstart="handleTouchstart"
   >
     <var-loading
-      class="var-button__loading"
+      :class="n('loading')"
       var-button-cover
       :type="loadingType"
       :size="loadingSize"
       :radius="loadingRadius"
       v-if="loading || pending"
     />
-    <div class="var-button__content" :class="[loading || pending ? 'var-button--hidden' : null]">
+    <div :class="classes(n('content'), [loading || pending, n('--hidden')])">
       <slot />
     </div>
   </button>
@@ -37,8 +39,12 @@
 <script lang="ts">
 import Ripple from '../ripple'
 import VarLoading from '../loading'
-import { defineComponent, Ref, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { props } from './props'
+import { createNamespace } from '../utils/components'
+import type { Ref } from 'vue'
+
+const { n, classes } = createNamespace('button')
 
 export default defineComponent({
   name: 'VarButton',
@@ -80,6 +86,8 @@ export default defineComponent({
     }
 
     return {
+      n,
+      classes,
       pending,
       handleClick,
       handleTouchstart,

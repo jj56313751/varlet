@@ -1,19 +1,21 @@
-# @varlet/cli
+# Varlet Cli
+
+### 介绍
 
 开箱即用的 `Vue3组件库` 快速成型工具，提供了一系列命令和工具去解决组件库开发上的问题
 
 ### 特性
 
-- 1.开箱即用的组件库开发环境
-- 2.开箱即用的组件库编译工具，支持导出 `esm` 和 `umd` 两种模块代码
-- 3.基于配置文件的组件库文档站点，支持百度统计和主题定制
-- 4.支持 `单文件组件(sfc)` 和 `tsx，jsx` 两种风格的组件库编写风格
-- 5.开箱即用的代码检查工具
-- 6.开箱即用的单元测试工具
-- 7.开箱即用的代码发布工具,发布到 npm 和 github, 并自动生成更新日志
-- 8.支持 `Typescript`
-- 9.支持 `暗黑模式`
-- 10.基于 `pnpm`
+- 📦 开箱即用的组件库开发环境
+- 📦 开箱即用的组件库编译工具，支持导出 `esm` 和 `umd` 两种模块代码
+- 🛠️ 基于配置文件的组件库文档站点，支持百度统计和主题定制
+- 🛠️ 支持 `单文件组件(sfc)` 和 `tsx，jsx` 两种风格的组件库编写风格
+- 📦 开箱即用的代码检查工具
+- 📦 开箱即用的单元测试工具
+- 📦 开箱即用的代码发布工具,发布到 npm 和 github, 并自动生成更新日志
+- 💪 支持 `Typescript`
+- 💪 支持 `暗黑模式`
+- 🚀 基于 `pnpm`
 
 ### 快速开始
 
@@ -56,7 +58,7 @@ pnpm dev
 | `mobile` | mobile端文档结构配置 | _SiteMobile_ | `-` |
 | `moduleCompatible` | 模块兼容配置 | _Record<string, string>_ | `-` |
 
-#### 模块适配对象
+### 模块适配对象
 
 一些外部依赖可能需要进行模块语法的适配，以达到可以正确编译到 `commonjs` 和 `esmodule` 的目的，例如 `dayjs` 的 `esmodule` 写法是
 
@@ -81,7 +83,7 @@ module.exports = {
 }
 ```
 
-#### SiteThemes
+### SiteThemes
 
 主题变量相关，由于默认的主题变量可能时常修改，以 `varlet` 官方文档的主题为准
 
@@ -104,13 +106,25 @@ module.exports = {
 | `color-side-bar-active-background` |
 | `color-app-bar` |
 | `color-nav-button-hover-background` |
+| `color-mobile-cell-hover` |
 | `color-pc-language-active` |
 | `color-pc-language-active-background` |
-| `color-mobile-cell-hover` |
 | `color-mobile-language-active` |
 | `color-mobile-language-active-background` |
+| `color-hl-background` |
+| `color-hl-code` |
+| `color-hl-border` |
+| `color-hl-group-a` |
+| `color-hl-group-b` |
+| `color-hl-group-c` |
+| `color-hl-group-d` |
+| `color-hl-group-e` |
+| `color-hl-group-f` |
+| `color-hl-group-g` |
+| `color-hl-group-h` |
+| `color-hl-group-i` |
 
-#### SiteHighlight
+### SiteHighlight
 
 代码片段高亮，基于[highlight.js](https://highlightjs.org/)
 
@@ -118,7 +132,7 @@ module.exports = {
 | ----- | -------------- | -------- | ---------- |
 | `style` | highlight的css地址 | _string_ | `-` |
 
-#### SiteAnalysis
+### SiteAnalysis
 
 统计埋点相关
 
@@ -126,7 +140,7 @@ module.exports = {
 | ----- | -------------- | -------- | ---------- |
 | `baidu` | 百度统计脚本地址 | _string_ | `-` |
 
-#### SitePC, SiteMobile
+### SitePC, SiteMobile
 
 文档结构部分相关，示例配置如下
 
@@ -182,6 +196,7 @@ module.exports = {
     header: {
       darkMode: null,
       i18n: null,
+      playground: null,
       github: 'https://github.com/varletjs/varlet',
     },
   },
@@ -257,7 +272,7 @@ varlet-cli release
 varlet-cli gen <projectName>
 ```
 
-### babel
+### Babel
 
 对 `babel` 进行配置，首先在 `package.json` 中指定目标浏览器
 
@@ -286,9 +301,9 @@ module.exports = {
 }
 ```
 
-### git 和 npm
+### Git 和 Npm
 
-#### git-hook
+#### Git-hook
 
 `simple-git-hooks`，`lint-staged` 配合 `eslint`，`stylelint`，`varlet-cli commit-lint` 做commit前的检查，`package.json` 配置如下
 
@@ -352,7 +367,7 @@ src/*/__tests__/**
 *.md
 ```
 
-### typescript
+### Typescript
 
 创建 `tsconfig.json`
 
@@ -372,7 +387,7 @@ src/*/__tests__/**
 }
 ```
 
-#### 发布前注意
+### 发布前注意
 
-1. `npm` 的仓库源必须指向 `npm` 官方镜像
-2. 执行 `npm login` 进行登录
+- 1.`npm` 的仓库源必须指向 `npm` 官方镜像
+- 2.执行 `npm login` 进行登录

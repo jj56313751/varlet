@@ -54,7 +54,7 @@
                   v-for="l in labels"
                   :key="l"
                   @click.stop
-                  @close="(e) => handleClose(l)"
+                  @close="() => handleClose(l)"
                 >
                   {{ l }}
                 </var-chip>
@@ -248,7 +248,7 @@ export default defineComponent({
       }
 
       wrapWidth.value = getWrapWidth()
-      offsetY.value = getOffsetY()
+      offsetY.value = getOffsetY() + toPxNum(props.offsetY)
 
       isFocus.value = true
 
@@ -341,6 +341,8 @@ export default defineComponent({
 
     // expose
     const focus = () => {
+      wrapWidth.value = getWrapWidth()
+      offsetY.value = getOffsetY() + toPxNum(props.offsetY)
       isFocus.value = true
     }
 
