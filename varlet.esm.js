@@ -1376,8 +1376,8 @@ var Locale = {
   useLocale
 };
 var {
-  n: n$4,
-  classes: classes$4
+  n: n$3,
+  classes: classes$3
 } = createNamespace("action-sheet");
 var _hoisted_1$G = ["onClick"];
 function render$W(_ctx, _cache) {
@@ -1461,8 +1461,8 @@ var VarActionSheet = defineComponent({
       immediate: true
     });
     return {
-      n: n$4,
-      classes: classes$4,
+      n: n$3,
+      classes: classes$3,
       call,
       popupShow,
       pack,
@@ -1799,8 +1799,8 @@ var props$N = {
   }
 };
 var {
-  n: n$3,
-  classes: classes$3
+  n: n$2,
+  classes: classes$2
 } = createNamespace("button");
 var _hoisted_1$D = ["disabled"];
 function render$T(_ctx, _cache) {
@@ -1875,8 +1875,8 @@ var Button = defineComponent({
       attemptAutoLoading(onTouchstart(e));
     };
     return {
-      n: n$3,
-      classes: classes$3,
+      n: n$2,
+      classes: classes$2,
       pending,
       handleClick,
       handleTouchstart
@@ -2154,8 +2154,8 @@ var props$K = {
   }
 };
 var {
-  n: n$2,
-  classes: classes$2
+  n: n$1,
+  classes: classes$1
 } = createNamespace("card");
 var _hoisted_1$B = ["src", "alt"];
 function render$Q(_ctx, _cache) {
@@ -2199,8 +2199,8 @@ var Card = defineComponent({
   props: props$K,
   setup() {
     return {
-      n: n$2,
-      classes: classes$2,
+      n: n$1,
+      classes: classes$1,
       toSizeUnit
     };
   }
@@ -13803,8 +13803,8 @@ var props$a = {
   }
 };
 var {
-  n: n$1,
-  classes: classes$1
+  n,
+  classes
 } = createNamespace("snackbar");
 var ICON_TYPE_DICT = {
   success: "checkbox-marked-circle",
@@ -13860,7 +13860,7 @@ var VarSnackbarCore = defineComponent({
         vertical,
         type
       } = props2;
-      return classes$1(n$1("wrapper"), n$1("wrapper-" + position), "var-elevation--4", [vertical, n$1("vertical"), ""], [type && SNACKBAR_TYPE.includes(type), n$1("wrapper-" + type), ""]);
+      return classes(n("wrapper"), n("wrapper-" + position), "var-elevation--4", [vertical, n("vertical"), ""], [type && SNACKBAR_TYPE.includes(type), n("wrapper-" + type), ""]);
     });
     var isForbidClick = computed(() => props2.type === "loading" || props2.forbidClick);
     var iconName = computed(() => {
@@ -13894,8 +13894,8 @@ var VarSnackbarCore = defineComponent({
       }
     });
     return {
-      n: n$1,
-      classes: classes$1,
+      n,
+      classes,
       zIndex,
       snackbarClass,
       iconName,
@@ -13903,29 +13903,25 @@ var VarSnackbarCore = defineComponent({
     };
   }
 });
-var {
-  n,
-  classes
-} = createNamespace("snackbar");
 function render$b(_ctx, _cache) {
   var _component_var_snackbar_core = resolveComponent("var-snackbar-core");
   return openBlock(), createBlock(Teleport, {
     to: _ctx.teleport,
     disabled: _ctx.disabled
   }, [createVNode(Transition, {
-    name: _ctx.n("fade"),
+    name: "var-snackbar-fade",
     onAfterEnter: _ctx.onOpened,
     onAfterLeave: _ctx.onClosed
   }, {
     default: withCtx(() => [createVNode(_component_var_snackbar_core, mergeProps(_ctx.$props, {
-      class: _ctx.n("transition")
+      class: "var-snackbar-transition"
     }), {
       action: withCtx(() => [renderSlot(_ctx.$slots, "action")]),
       default: withCtx(() => [renderSlot(_ctx.$slots, "default", {}, () => [createTextVNode(toDisplayString(_ctx.content), 1)])]),
       _: 3
-    }, 16, ["class"])]),
+    }, 16)]),
     _: 3
-  }, 8, ["name", "onAfterEnter", "onAfterLeave"])], 8, ["to", "disabled"]);
+  }, 8, ["onAfterEnter", "onAfterLeave"])], 8, ["to", "disabled"]);
 }
 var VarSnackbar = defineComponent({
   render: render$b,
@@ -13939,8 +13935,6 @@ var VarSnackbar = defineComponent({
       disabled
     } = useTeleport();
     return {
-      n,
-      classes,
       disabled
     };
   }
